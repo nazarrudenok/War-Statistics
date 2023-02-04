@@ -10,7 +10,7 @@ url = 'https://zp.gov.ua/ru/articles/item/16921/vtrati-voroga-zrostayut'
 response = requests.get(url)
 bs = BeautifulSoup(response.text, 'html.parser')
 
-time_str = time.strftime('%d.%m.%Y')
+time_str = time.strftime('%d.%m.%Y.%s')
 
 
 russian_items = bs.find('div', class_ = 'page-content content-text').find_all('p')

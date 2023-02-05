@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-import StLib as st
+import RussiaLossStatistics as rls
 
 bot = telebot.TeleBot("5973837906:AAFJM4ql6YUXRHe-k2QDAUauY_TBiAdfLbc")
 
@@ -31,8 +31,8 @@ def callback(call):
             avtomobiki = types.KeyboardButton('Автомобілі')
             rockets = types.KeyboardButton('Крилаті ракети')
             markup_reply.add(tanki, bbm, litaki, helicopteri, harmaty, ppo, bpla, avtomobiki, rockets)
-            bot.send_message(call.message.chat.id, st.personnel + ' ' +
-            'станом на ' + st.date,
+            bot.send_message(call.message.chat.id, rls.personnel + ' ' +
+            'станом на ' + rls.date,
             reply_markup = markup_reply, parse_mode='html')
         if call.data == 'dopomoga':
             bot.send_message(call.message.chat.id, 'Потрібна допомога?' + '\n' +
@@ -41,31 +41,31 @@ def callback(call):
 @bot.message_handler(content_types=['text'])
 def text(message):
     if message.text == 'Танки':
-        bot.send_message(message.chat.id, st.tanks + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id, rls.tanks + ' ' +
+        'станом на ' + rls.date)
     elif message.text == 'ББМ':
-        bot.send_message(message.chat.id, st.bbm + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id, rls.bbm + ' ' +
+        'станом на ' + rls.date)
     elif message.text == 'Літаки':
-        bot.send_message(message.chat.id, st.planes + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id,rls.planes + ' ' +
+        'станом на ' + rls.date)
     elif message.text == 'Гелікоптери':
-        bot.send_message(message.chat.id, st.helicopters + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id, rls.helicopters + ' ' +
+        'станом на ' + rls.date)
     elif message.text == 'Гармати':
-        bot.send_message(message.chat.id, st.guns + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id, rls.guns + ' ' +
+        'станом на ' + rls.date)
     elif message.text == 'Засоби ППО':
-        bot.send_message(message.chat.id, st.ppo_means + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id, rls.ppo_means + ' ' +
+        'станом на ' + rls.date)
     elif message.text == 'БПЛА':
-        bot.send_message(message.chat.id, st.drones + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id, rls.drones + ' ' +
+        'станом на ' + rls.date)
     elif message.text == 'Автомобілі':
-        bot.send_message(message.chat.id, st.cars + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id, rls.cars + ' ' +
+        'станом на ' + rls.date)
     elif message.text == 'Крилаті ракети':
-        bot.send_message(message.chat.id, st.rockets + ' ' +
-        'станом на ' + st.date)
+        bot.send_message(message.chat.id, rls.rockets + ' ' +
+        'станом на ' + rls.date)
     
 bot.polling(none_stop=True)

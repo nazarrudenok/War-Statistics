@@ -52,7 +52,7 @@ def text(message):
     elif message.text == 'Гелікоптери':
         bot.send_message(message.chat.id, st.helicopters + ' ' +
         'станом на ' + st.date)
-    elif message.text == 'Артилерійські системи':
+    elif message.text == 'Гармати':
         bot.send_message(message.chat.id, st.guns + ' ' +
         'станом на ' + st.date)
     elif message.text == 'Засоби ППО':

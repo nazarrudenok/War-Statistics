@@ -1,2 +1,4 @@
 pyTelegramBotAPI==4.9.0
 RussiaLoss==1.0
+beautifulsoup4==4.11.1
+requests==2.28.2

@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-import RussiaLossStatistics as rls
+import LossesStaisticsOfrussia as rls
 
 bot = telebot.TeleBot("5973837906:AAFJM4ql6YUXRHe-k2QDAUauY_TBiAdfLbc")
 

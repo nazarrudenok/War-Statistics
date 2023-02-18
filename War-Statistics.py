@@ -19,11 +19,11 @@ def start(message):
     bot.send_message(message.chat.id, 'Вітаю! Обери мову\nCongratulations! Choose a language\n\nІнформація про повітряні тривоги - /air_alarms', reply_markup = markup)
 
 
-    while True:
-        current_time = datetime.datetime.now(tz)
-        if current_time.hour == 9 and current_time.minute == 0:
-            bot.send_message(chat_id=message.chat.id, text="Добрий ранок! Втрати за минулу добу:\n" + rls.personnel)
-        time.sleep(60)
+    # while True:
+    #     current_time = datetime.datetime.now(tz)
+    #     if current_time.hour == 9 and current_time.minute == 0:
+    #         bot.send_message(chat_id=message.chat.id, text="Добрий ранок! Втрати за минулу добу:\n" + rls.personnel)
+    #     time.sleep(60)
 
 
 @bot.message_handler(commands=['air_alarms'])

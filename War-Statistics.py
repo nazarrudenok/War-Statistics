@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-import lossesofrussia as rls
+import LossesOfrussia as rls
 import requests
 import datetime
 import time
@@ -10,6 +10,8 @@ bot = telebot.TeleBot("5973837906:AAFJM4ql6YUXRHe-k2QDAUauY_TBiAdfLbc")
 
 tz = pytz.timezone('Europe/Kiev')
 
+current_regions_alarm = []
+
 @bot.message_handler(commands = ["start"])
 def start(message):        
     markup = types.InlineKeyboardMarkup(row_width = 2)
@@ -18,99 +20,21 @@ def start(message):
     markup.add(sho_po_rusni, dopomoga)
     bot.send_message(message.chat.id, 'Вітаю! Обери мову\nCongratulations! Choose a language\n\nІнформація про повітряні тривоги - /air_alarms', reply_markup = markup)
 
-
-    # while True:
-    #     current_time = datetime.datetime.now(tz)
-    #     if current_time.hour == 9 and current_time.minute == 0:
-    #         bot.send_message(chat_id=message.chat.id, text="Добрий ранок! Втрати за минулу добу:\n" + rls.personnel)
-    #     time.sleep(60)
-
-
 @bot.message_handler(commands=['air_alarms'])
 def alarms(message):
     headers = {'X-API-Key': '52b9d358bcb491a92d2ba114fd07dde825961358'}
     response = requests.get('https://alerts.com.ua/api/states', headers = headers)
-    
     alarm_json = response.json()
-    
-    alarm_vinnytsia = alarm_json['states'][0]['alert']
-    alarm_volyn = alarm_json['states'][1]['alert']
-    alarm_dnipro = alarm_json['states'][2]['alert']
-    alarm_donbas = alarm_json['states'][3]['alert']
-    alarm_zhytomyr = alarm_json['states'][4]['alert']
-    alarm_karpaty = alarm_json['states'][5]['alert']
-    alarm_zaporizhya = alarm_json['states'][6]['alert']
-    alarm_franik = alarm_json['states'][7]['alert']
-    alarm_kyiv_obl = alarm_json['states'][8]['alert']
-    alarm_kirovograd = alarm_json['states'][9]['alert']
-    alarm_lugansk = alarm_json['states'][10]['alert']
-    alarm_lviv = alarm_json['states'][11]['alert']
-    alarm_mykolaiv = alarm_json['states'][12]['alert']
-    alarm_odessa = alarm_json['states'][13]['alert']
-    alarm_poltava = alarm_json['states'][14]['alert']
-    alarm_rivne = alarm_json['states'][15]['alert']
-    alarm_sumy = alarm_json['states'][16]['alert']
-    alarm_ternopil = alarm_json['states'][17]['alert']
-    alarm_kharkiv = alarm_json['states'][18]['alert']
-    alarm_kherson = alarm_json['states'][19]['alert']
-    alarm_khmel = alarm_json['states'][20]['alert']
-    alarm_cherkasy = alarm_json['states'][21]['alert']
-    alarm_chernivtsy = alarm_json['states'][22]['alert']
-    alarm_chernihiv = alarm_json['states'][23]['alert']
-    alarm_kyiv = alarm_json['states'][24]['alert']
+    for i in range(len(alarm_json['states'])):
+        if alarm_json['states'][i]['alert']:
+            if alarm_json['states'][i]['name'] not in current_regions_alarm:
+                bot.send_message(message.chat.id, '🔴 ' + 'Повітряна тривога в ' + alarm_json['states'][i]['name'] + '\nСлідкуйте за подальшими повідомленнями')                
+                current_regions_alarm.append(alarm_json['states'][i]['name'])
+        if alarm_json['states'][i]['alert'] == False:
+            if alarm_json['states'][i]['name'] in current_regions_alarm:
+                bot.send_message(message.chat.id, '🟢 ' + 'Відбій тривоги в ' + alarm_json['states'][i]['name'] + '\nСлідкуйте за подальшими повідомленнями')
+                current_regions_alarm.remove(alarm_json['states'][i]['name'])
 
-
-    if alarm_vinnytsia:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][0]['name'])
-    if alarm_volyn:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][1]['name'])
-    if alarm_dnipro:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][2]['name'])
-    if alarm_donbas:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][3]['name'])
-    if alarm_zhytomyr:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][4]['name'])
-    if alarm_karpaty:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][5]['name'])
-    if alarm_zaporizhya:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][6]['name'])
-    if alarm_franik:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][7]['name'])
-    if alarm_kyiv_obl:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][8]['name'])
-    if alarm_kirovograd:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][9]['name'])
-    if alarm_lugansk:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][10]['name'])
-    if alarm_lviv:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][11]['name'])
-    if alarm_mykolaiv:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][12]['name'])
-    if alarm_odessa:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][13]['name'])
-    if alarm_poltava:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][14]['name'])
-    if alarm_rivne:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][15]['name'])
-    if alarm_sumy:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][16]['name'])
-    if alarm_ternopil:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][17]['name'])
-    if alarm_kharkiv:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][18]['name'])
-    if alarm_kherson:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][19]['name'])
-    if alarm_khmel:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][20]['name'])
-    if alarm_cherkasy:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][21]['name'])
-    if alarm_chernivtsy:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][22]['name'])
-    if alarm_chernihiv:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][23]['name'])
-    if alarm_kyiv:
-        bot.send_message(message.chat.id, '🚨 Повітряна тривога зараз у ' + alarm_json['states'][24]['name'])
-        
 
 @bot.callback_query_handler(func = lambda call: True)
 def callback(call):

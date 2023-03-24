@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-import LossesOfrussia as rls
+import lossesofrussia as rls
 import requests
 import datetime
 import time
@@ -28,13 +28,8 @@ def alarms(message):
     for i in range(len(alarm_json['states'])):
         if alarm_json['states'][i]['alert']:
             if alarm_json['states'][i]['name'] not in current_regions_alarm:
-                bot.send_message(message.chat.id, '🔴 ' + 'Повітряна тривога в ' + alarm_json['states'][i]['name'] + '\nСлідкуйте за подальшими повідомленнями')                
+                bot.send_message(message.chat.id, '🔴 ' + 'Повітряна тривога в ' + alarm_json['states'][i]['name'])                
                 current_regions_alarm.append(alarm_json['states'][i]['name'])
-        if alarm_json['states'][i]['alert'] == False:
-            if alarm_json['states'][i]['name'] in current_regions_alarm:
-                bot.send_message(message.chat.id, '🟢 ' + 'Відбій тривоги в ' + alarm_json['states'][i]['name'] + '\nСлідкуйте за подальшими повідомленнями')
-                current_regions_alarm.remove(alarm_json['states'][i]['name'])
-
 
 @bot.callback_query_handler(func = lambda call: True)
 def callback(call):

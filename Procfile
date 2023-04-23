@@ -1,1 +1,1 @@
-worker: python War-Statistics.py
+worker: python main.py

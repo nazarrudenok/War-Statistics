@@ -1,13 +1,20 @@
 import telebot
 from telebot import types
+import fake_useragent
 import requests
 from bs4 import BeautifulSoup
 from RussianLosses import *
 from config import TOKEN
 
+user = fake_useragent.UserAgent().random
+
+headers_ = {
+    'user-agent': user
+}
+
 def date_func():
     url = 'https://www.minusrus.com/'
-    r = requests.get(url)
+    r = requests.get(url, headers=headers_)
     bs = BeautifulSoup(r.text, 'html.parser')
     date_ = bs.find('div', class_ = 'date').find('span').text
     return date_

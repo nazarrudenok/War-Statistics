@@ -70,6 +70,6 @@ def text(message):
     mch = message.chat.id
     mt = message.text
     if mt == 'Особовий склад':
-        bot.send_message(mch, f'Знищено особового складу: {personnel("total")}\nЗа останню добу: {personnel("quantity")}')
+        bot.send_message(mch, f'Знищено особового складу: ' + {personnel("total")} '\nЗа останню добу: ' + personnel("quantity"))
 
 bot.polling()

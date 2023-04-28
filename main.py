@@ -13,21 +13,15 @@ headers_ = {
     'user-agent': user
 }
 
-url = 'https://www.minusrus.com/'
+url = 'https://russianwarship.rip/'
 r = requests.get(url)
 
 bs = BeautifulSoup(r.text, 'html.parser')
 
 def personnel(item):
-    total = bs.find('div', class_ = 'card__amount').find_all('span')[0].text.replace('.', ' ').replace('~', '').strip()
-    quantity = bs.find('div', class_ = 'card__amount').find_all('span')[1].text.strip()
     if item == 'total':
+        total = bs.find('div', class_ = 'loses-item-title').find_all('span')[0].text
         return total
-    elif item == 'quantity':
-        return quantity
-    else:
-        error = 'error: invalid argument'
-        return error
 
 # def date_func():
 #     url = 'https://www.minusrus.com/'
@@ -87,8 +81,5 @@ def text(message):
     mch = message.chat.id
     mt = message.text
     if mt == 'Особовий склад':
-        bot.send_message(mch, 'asd')
-        while True:
-            print(personnel('total'))
-            time.sleep(3)
+        bot.send_message(mch, personnel('total'))
 bot.polling()

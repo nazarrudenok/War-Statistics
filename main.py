@@ -4,7 +4,7 @@ import fake_useragent
 import requests
 import time
 from bs4 import BeautifulSoup
-from RussianLosses import *
+# from RussianLosses import *
 from config import TOKEN
 
 user = fake_useragent.UserAgent().random
@@ -12,6 +12,22 @@ user = fake_useragent.UserAgent().random
 headers_ = {
     'user-agent': user
 }
+
+url = 'https://www.minusrus.com/'
+r = requests.get(url)
+
+bs = BeautifulSoup(r.text, 'html.parser')
+
+def personnel(item):
+    total = bs.find('div', class_ = 'card__amount').find_all('span')[0].text.replace('.', ' ').replace('~', '').strip()
+    quantity = bs.find('div', class_ = 'card__amount').find_all('span')[1].text.strip()
+    if item == 'total':
+        return total
+    elif item == 'quantity':
+        return quantity
+    else:
+        error = 'error: invalid argument'
+        return error
 
 # def date_func():
 #     url = 'https://www.minusrus.com/'

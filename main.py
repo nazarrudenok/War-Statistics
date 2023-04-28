@@ -2,6 +2,7 @@ import telebot
 from telebot import types
 import fake_useragent
 import requests
+import time
 from bs4 import BeautifulSoup
 from RussianLosses import *
 from config import TOKEN
@@ -70,7 +71,8 @@ def text(message):
     mch = message.chat.id
     mt = message.text
     if mt == 'Особовий склад':
-        bot.send_message(mch, f'Знищено особового складу: ' + personnel("total") + '\nЗа останню добу: ' + personnel("quantity"))
-        # bot.send_message(mch, 'Знищено особового складу: ' + personnel('total') + '')
-
+        bot.send_message(mch, 'asd')
+        while True:
+            print(personnel('total'))
+            time.sleep(3)
 bot.polling()

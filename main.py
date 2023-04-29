@@ -3,7 +3,7 @@ from telebot import types
 import fake_useragent
 import requests
 from bs4 import BeautifulSoup
-from RussianLosses import *
+# from RussianLosses import *
 from config import TOKEN
 
 user = fake_useragent.UserAgent().random
@@ -23,6 +23,10 @@ def date_func():
     bs = BeautifulSoup(r.text, 'html.parser')
     date_ = bs.find('div', class_ = 'date').find('span').text
     return date_
+
+def personnell():
+    total = bs.find('div', class_ = 'loses-item-title').find_all('span')[0].text.strip()
+    return total
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -75,33 +79,34 @@ def text(message):
     mch = message.chat.id
     mt = message.text
     if mt == 'Особовий склад':
-        bot.send_message(mch, f'Станом на {date_func()}\nЗнищено особового складу: {personnel("total")}\nЗа останню добу: {personnel("quantity")}')
-    elif mt == 'Танки':
-        bot.send_message(mch, f'Станом на {date_func()}\nЗнищено танків: {tanks("total")}\nЗа останню добу: {tanks("quantity")}')
-    elif mt == 'ББМ':
-        bot.send_message(mch, f'Станом на {date_func()}\nЗнищено броньованих машин: {bbm("total")}\nЗа останню добу: {bbm("quantity")}')
-    elif mt == 'Літаки':
-        bot.send_message(mch, f'Станом на {date_func()}\nЗнищено літаків: {planes("total")}\nЗа останню добу: {planes("quantity")}')
-    elif mt == 'Гелікоптери':
-        bot.send_message(mch, f'Станом на {date_func()}\nЗнищено гелікоптерів: {helicopters("total")}\nЗа останню добу: {helicopters("quantity")}')
-    elif mt == 'Артилерія':
-        bot.send_message(mch, f'Станом на {date_func()}\nЗнищено артилерійських установок: {artillery("total")}\nЗа останню добу: {artillery("quantity")}')
-    elif mt == 'Кораблі':
-        bot.send_message(mch, f'Станом на {date_func()}\nЗнищено кораблів: {warships("total")}\nЗа останню добу: {warships("quantity")}')
+        bot.send_message(mch, personnell())
+    #     bot.send_message(mch, f'Станом на {date_func()}\nЗнищено особового складу: {personnel("total")}\nЗа останню добу: {personnel("quantity")}')
+    # elif mt == 'Танки':
+    #     bot.send_message(mch, f'Станом на {date_func()}\nЗнищено танків: {tanks("total")}\nЗа останню добу: {tanks("quantity")}')
+    # elif mt == 'ББМ':
+    #     bot.send_message(mch, f'Станом на {date_func()}\nЗнищено броньованих машин: {bbm("total")}\nЗа останню добу: {bbm("quantity")}')
+    # elif mt == 'Літаки':
+    #     bot.send_message(mch, f'Станом на {date_func()}\nЗнищено літаків: {planes("total")}\nЗа останню добу: {planes("quantity")}')
+    # elif mt == 'Гелікоптери':
+    #     bot.send_message(mch, f'Станом на {date_func()}\nЗнищено гелікоптерів: {helicopters("total")}\nЗа останню добу: {helicopters("quantity")}')
+    # elif mt == 'Артилерія':
+    #     bot.send_message(mch, f'Станом на {date_func()}\nЗнищено артилерійських установок: {artillery("total")}\nЗа останню добу: {artillery("quantity")}')
+    # elif mt == 'Кораблі':
+    #     bot.send_message(mch, f'Станом на {date_func()}\nЗнищено кораблів: {warships("total")}\nЗа останню добу: {warships("quantity")}')
     
-    if mt == 'Personnel':
-        bot.send_message(mch, f'As of {date_func()}\nPersonnel were destroyed: {personnel("total")}\nFor the last day: {personnel("quantity")}')
-    elif mt == 'Tanks':
-        bot.send_message(mch, f'As of {date_func()}\nTanks were destroyed: {tanks("total")}\nFor the last day: {tanks("quantity")}')
-    elif mt == 'Armored vehicle':
-        bot.send_message(mch, f'As of {date_func()}\nArmored vehicles were destroyed: {bbm("total")}\nFor the last day: {bbm("quantity")}')
-    elif mt == 'Planes':
-        bot.send_message(mch, f'As of {date_func()}\nPlanes were destroyed: {planes("total")}\nFor the last day: {planes("quantity")}')
-    elif mt == 'Helicopters':
-        bot.send_message(mch, f'As of {date_func()}\nHelicopters were destroyed: {helicopters("total")}\nFor the last day: {helicopters("quantity")}')
-    elif mt == 'Artillery':
-        bot.send_message(mch, f'As of {date_func()}\nArtillery were destroyed: {artillery("total")}\nFor the last day: {artillery("quantity")}')
-    elif mt == 'Warships':
-        bot.send_message(mch, f'As of {date_func()}\nWarships were destroyed: {warships("total")}\nFor the last day: {warships("quantity")}')
+    # if mt == 'Personnel':
+    #     bot.send_message(mch, f'As of {date_func()}\nPersonnel were destroyed: {personnel("total")}\nFor the last day: {personnel("quantity")}')
+    # elif mt == 'Tanks':
+    #     bot.send_message(mch, f'As of {date_func()}\nTanks were destroyed: {tanks("total")}\nFor the last day: {tanks("quantity")}')
+    # elif mt == 'Armored vehicle':
+    #     bot.send_message(mch, f'As of {date_func()}\nArmored vehicles were destroyed: {bbm("total")}\nFor the last day: {bbm("quantity")}')
+    # elif mt == 'Planes':
+    #     bot.send_message(mch, f'As of {date_func()}\nPlanes were destroyed: {planes("total")}\nFor the last day: {planes("quantity")}')
+    # elif mt == 'Helicopters':
+    #     bot.send_message(mch, f'As of {date_func()}\nHelicopters were destroyed: {helicopters("total")}\nFor the last day: {helicopters("quantity")}')
+    # elif mt == 'Artillery':
+    #     bot.send_message(mch, f'As of {date_func()}\nArtillery were destroyed: {artillery("total")}\nFor the last day: {artillery("quantity")}')
+    # elif mt == 'Warships':
+    #     bot.send_message(mch, f'As of {date_func()}\nWarships were destroyed: {warships("total")}\nFor the last day: {warships("quantity")}')
 
 bot.polling()

@@ -2,7 +2,6 @@ import telebot
 from telebot import types
 import fake_useragent
 import requests
-import time
 from bs4 import BeautifulSoup
 from RussianLosses import *
 from config import TOKEN

@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-
-
 def personnel(item):
     url = 'https://russianwarship.rip/'
     r = requests.get(url)
@@ -224,3 +222,10 @@ def cruise_missiles(item):
     else:
         error = 'error: invalid argument'
         return error
+
+def date_func():
+    url2 = 'https://www.calendardate.com/todays.htm'
+    r2 = requests.get(url2)
+    bs = BeautifulSoup(r2.text, 'html.parser')
+    date_ = bs.find_all('tr', id = 'indtod')[3].find_all('td')[1].text.replace('-', '.').strip()
+    return date_

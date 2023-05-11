@@ -139,7 +139,7 @@ def text(message):
     elif '.' and 'ua' in mt:
         mt = mt.replace('.', '-')
         mt = mt[:10]
-        bot.send_message(cht, losses_detaited(mt))
+        bot.reply_to_message(cht, losses_detaited(mt))
     else:
         bot.send_message(cht, 'Я не розумію цієї команди')
 

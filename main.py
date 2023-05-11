@@ -141,7 +141,7 @@ def text(message):
         mt = mt[:10]
         bot.send_message(cht, losses_detaited(mt))
     else:
-        bot.reply_to_message(cht, 'Я не розумію цієї команди')
+        bot.send_message(cht, 'Я не розумію цієї команди')
 
     if mt == 'Personnel':
         bot.send_message(cht, f'As of {date()}, {day()} day of war\nPersonnel were destroyed: {personnel("total")}\nFor the last day: {personnel("quantity")}')

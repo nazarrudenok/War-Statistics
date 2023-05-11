@@ -139,9 +139,9 @@ def text(message):
     elif '.' and 'ua' in mt:
         mt = mt.replace('.', '-')
         mt = mt[:10]
-        bot.reply_to_message(cht, losses_detaited(mt))
+        bot.send_message(cht, losses_detaited(mt))
     else:
-        bot.send_message(cht, 'Я не розумію цієї команди')
+        bot.reply_to_message(cht, 'Я не розумію цієї команди')
 
     if mt == 'Personnel':
         bot.send_message(cht, f'As of {date()}, {day()} day of war\nPersonnel were destroyed: {personnel("total")}\nFor the last day: {personnel("quantity")}')
